@@ -1,31 +1,90 @@
-import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import * as React from "react";
+import { useState } from "react";
+import {
+  Collapse,
+  createTheme,
+  CssBaseline,
+  Grid,
+  ThemeProvider,
+  Typography,
+  Box, TextField, Grow
+} from "@mui/material";
+import EquationCard from "../components/equationCard";
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+const theme = createTheme({});
 
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <StaticImage
-      src="../images/gatsby-astronaut.png"
-      width={300}
-      quality={95}
-      formats={["auto", "webp", "avif"]}
-      alt="A Gatsby astronaut"
-      style={{ marginBottom: `1.45rem` }}
-    />
-    <p>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link> <br />
-      <Link to="/using-ssr">Go to "Using SSR"</Link> <br />
-      <Link to="/using-dsg">Go to "Using DSG"</Link>
-    </p>
-  </Layout>
-)
+const test_content = [
+  {
+    title: "Sigmoid Function",
+    category: "Mathematical Functions",
+    latex: "S(x)=\\frac{1}{1+e^{-x}}"
+  },
+  {
+    title: "Law of Universal Gravitation",
+    category: "Classical Mechanics",
+    latex: "F=G\\frac{m_1m_2}{r^2}"
+  },
+  {
+    title: "Newton's Second Law of Motion",
+    category: "Classical Mechanics",
+    latex: "\\bm{F}_{net} = m\\bm{a}"
+  },
+  {
+    title: "Dot product",
+    category: "Algebra",
+    latex: "\\bm{a}\\cdot\\bm{b}=\\sum^n_{i=1}a_ib_i"
+  }
+];
 
-export default IndexPage
+const searchFieldTransition = theme.transitions.create(["padding"]);
+
+function IndexPage() {
+  const [searchField, setSearchField] = useState("");
+
+  function handleSearchFieldChange(event) {
+    setSearchField(event.target.value);
+  }
+
+  const isSearchActive = searchField !== "";
+
+  return <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <Grid container direction="column">
+      <Grid item sx={{ transition: searchFieldTransition }} display="flex"
+            flexDirection="column"
+            alignItems="center"
+            paddingTop={isSearchActive ? theme.spacing(4) : "35vh"}>
+        <Box sx={{ marginTop: "auto" }}>
+          <Collapse in={!isSearchActive}>
+            <Typography variant="h1" textAlign="center"
+                        gutterBottom>equator</Typography>
+          </Collapse>
+          <TextField sx={{
+            minWidth: 324,
+            width: "50vw",
+            maxWidth: 624
+          }} placeholder="Search for an equation"
+                     value={searchField} onChange={handleSearchFieldChange}
+                     textAlign="center"
+                     gutterBottom />
+        </Box>
+      </Grid>
+      <Grid item container spacing={2} padding={theme.spacing(4, 2)}>
+        {
+          isSearchActive ? test_content.map((content, index) =>
+            <Grid item xs={12} s={6} md={6} lg={4}>
+              <Grow in={isSearchActive} timeout={750}>
+                <EquationCard key={index} title={content.title}
+                              category={content.category}
+                              latex={content.latex} />
+              </Grow>
+            </Grid>
+          ) : null
+        }
+      </Grid>
+    </Grid>
+  </ThemeProvider>;
+
+}
+
+export default IndexPage;
