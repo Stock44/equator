@@ -9,6 +9,7 @@ import {
   Typography,
   Box, TextField, Grow
 } from "@mui/material";
+import Layout from "../components/layout";
 import EquationCard from "../components/equationCard";
 
 const theme = createTheme({});
@@ -47,8 +48,7 @@ function IndexPage() {
 
   const isSearchActive = searchField !== "";
 
-  return <ThemeProvider theme={theme}>
-    <CssBaseline />
+  return <Layout>
     <Grid container direction="column">
       <Grid item sx={{ transition: searchFieldTransition }} display="flex"
             flexDirection="column"
@@ -83,7 +83,7 @@ function IndexPage() {
         }
       </Grid>
     </Grid>
-  </ThemeProvider>;
+  </Layout>;
 
 }
 
