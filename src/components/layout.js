@@ -16,7 +16,7 @@ const theme = createTheme({
     sh: {
       fontWeight: 500,
       fontSize: 24
-    }
+    },
   }
 });
 

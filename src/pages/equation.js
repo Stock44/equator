@@ -8,6 +8,7 @@ import {
   Grid,
   Box, Stack, List, ListItem, Container
 } from "@mui/material";
+import TextFit from "@tomplum/react-textfit";
 import StyledTeX from "../components/StyledTeX";
 
 function EquationPage() {
@@ -23,12 +24,15 @@ function EquationPage() {
     <Container maxWidth="lg">
       <Stack>
         <Container>
-          <StyledTeX math="y=mx+b" sx={{
-            fontSize: "8vw",
-            textAlign: "center",
-            display: "block",
-            my: 8
-          }} />
+          <TextFit mode="single" max={48}>
+            <StyledTeX math="x = a_0 + \cfrac{1}{a_1
+          + \cfrac{1}{a_2
+          + \cfrac{1}{a_3 + \cfrac{1}{a_4} } } }" sx={{
+              textAlign: "center",
+              display: "block",
+              my: 6
+            }} />
+          </TextFit>
         </Container>
         <Grid container spacing={8}>
           <Grid item xs={12} lg={9}>
@@ -116,15 +120,29 @@ function EquationPage() {
           </Grid>
           <Grid item lg={3} sx={{
             display: {
-              md: 'block',
-              xs: 'none',
+              md: "block",
+              xs: "none"
             }
           }}>
-            <Typography variant="h6" sx={{
+            <Stack sx={{
               mt: 2,
               position: "sticky",
               top: 100
-            }}>Contents</Typography>
+            }}>
+              <Typography sx={{
+                color: "#808080"
+              }} gutterBottom>Contents</Typography>
+              <List>
+                {
+                  ["hello", "oxschool", "goodbye", "winter", "(s)pain"].map(
+                    (text) => <ListItem sx={{ p: 0, mt: 2 }}>
+                      <Typography sx={{
+                        color: "#808080"
+                      }}>{text}</Typography>
+                    </ListItem>)
+                }
+              </List>
+            </Stack>
           </Grid>
         </Grid>
       </Stack>
