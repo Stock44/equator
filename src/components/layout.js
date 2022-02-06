@@ -6,7 +6,10 @@ import "@fontsource/roboto/700.css";
 import * as styles from "./layout.module.css";
 import { createTheme, CssBaseline, Grid, ThemeProvider } from "@mui/material";
 
-const theme = createTheme({
+let theme = createTheme({
+  palette: {
+
+  },
   typography: {
     fontSize: 16,
     h: {
@@ -19,6 +22,21 @@ const theme = createTheme({
     },
   }
 });
+
+theme = createTheme(theme, {
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: theme.palette.background.default,
+          outlineWidth: 1,
+          outlineStyle: "solid",
+          outlineColor: theme.palette.grey["400"],
+        },
+      },
+    },
+  },
+})
 
 function Layout({ children }) {
   return <ThemeProvider theme={theme}>

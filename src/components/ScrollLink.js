@@ -1,6 +1,10 @@
-import * as React from 'react';
-import {Link} from "react-scroll";
+import * as React from "react";
+import { styled, Typography, Link as MuiLink } from "@mui/material";
+import { Link } from "react-scroll";
 
-const ScrollLink = React.forwardRef((props, ref) => <Link innerRef={ref} {...props} />)
+const AdapterLink = React.forwardRef(
+  (props, ref) => <Link innerRef={ref} {...props} />);
 
-export default ScrollLink
+const ScrollLink = (props) => <MuiLink component={AdapterLink} {...props} />;
+
+export default ScrollLink;

@@ -57,16 +57,16 @@ function IndexPage() {
         <Box sx={{ marginTop: "auto" }}>
           <Collapse in={!isSearchActive}>
             <Typography variant="h1" textAlign="center"
-                        gutterBottom>equator</Typography>
+                        gutterBottom color="primary">equator</Typography>
           </Collapse>
           <TextField sx={{
             minWidth: 324,
-            width: "50vw",
-            maxWidth: 624
+            width: "80vw",
+            maxWidth: "md",
           }} placeholder="Search for an equation"
                      value={searchField} onChange={handleSearchFieldChange}
                      textAlign="center"
-                     gutterBottom />
+                     gutterBottom autoComplete="off" autoFocus/>
         </Box>
       </Grid>
       <Grid item container spacing={2} padding={theme.spacing(4, 2)}>
@@ -76,7 +76,7 @@ function IndexPage() {
               <Grow in={isSearchActive} timeout={750}>
                 <EquationCard key={index} title={content.title}
                               category={content.category}
-                              latex={content.latex} />
+                              latex={content.latex} variant="outlined"/>
               </Grow>
             </Grid>
           ) : null

@@ -13,15 +13,15 @@ function EquationCard({
   return <Card sx={{ minWidth: 300 }} ref={ref} {...props}>
     <CardActionArea component={Link} to="/equation">
         <CardContent>
-          <Typography color="text.secondary"
-                      gutterBottom>{category}</Typography>
+          <Typography color="grey.600"
+                      variant="subtitle1">{category}</Typography>
           <StyledTeX math={latex} sx={{
             fontSize: "1.5em",
             textAlign: "left",
             display: "block",
             my: 2
           }} />
-          <Typography variant="h5"> {title} </Typography>
+          <Typography variant="h5" color="primary"> {title} </Typography>
         </CardContent>
     </CardActionArea>
   </Card>;
