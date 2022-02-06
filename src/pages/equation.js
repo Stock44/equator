@@ -14,7 +14,6 @@ import {
   Link,
   Drawer,
 } from "@mui/material";
-import traverse from "ast-traverse";
 import { Link as GatsbyLink } from "gatsby";
 import ScrollLink from "../components/ScrollLink";
 import TextFit from "@tomplum/react-textfit";
