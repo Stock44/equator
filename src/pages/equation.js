@@ -14,11 +14,12 @@ import {
   Link,
   Drawer,
 } from "@mui/material";
+import traverse from "ast-traverse";
 import { Link as GatsbyLink } from "gatsby";
 import ScrollLink from "../components/ScrollLink";
 import TextFit from "@tomplum/react-textfit";
 import StyledTeX from "../components/StyledTeX";
-import { active } from "./equation.module.css";
+import { active } from "./equations/equation.module.css";
 
 function EquationPage() {
   return <Layout>

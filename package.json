@@ -22,11 +22,11 @@
     "gatsby-transformer-remark": "^5.6.0",
     "gatsby-transformer-sharp": "^4.5.0",
     "katex": "^0.15.2",
-    "mathjax": "^3.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
-    "react-scroll": "^1.8.4"
+    "react-scroll": "^1.8.4",
+    "rehype-react": "^7.0.4"
   },
   "devDependencies": {
     "prettier": "^2.5.1"
