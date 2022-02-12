@@ -68,10 +68,6 @@ function Layout({ children }) {
     setMobileOpen(!mobileOpen);
   };
 
-  const container = window !== undefined
-    ? () => window.document.body
-    : undefined;
-
   return <ThemeProvider theme={theme}>
     <CssBaseline />
     <AppBar elevation={0} position="static" color="primary" sx={{
@@ -103,7 +99,7 @@ function Layout({ children }) {
         }} />
       </Toolbar>
     </AppBar>
-    <Drawer container={container} variant="temporary"
+    <Drawer variant="temporary"
             open={mobileOpen} onClose={handleDrawerToggle}
             sx={{
               display: {

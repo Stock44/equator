@@ -33,6 +33,7 @@ export class Section {
   /**
    * Build a section array from markdownRemark headings array.
    * @param {Array} headings
+   * @returns {Array[Section]}
    */
   static sectionArrayFromHeadings(headings) {
     let sections = [];

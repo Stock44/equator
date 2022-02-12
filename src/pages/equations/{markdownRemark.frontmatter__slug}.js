@@ -1,4 +1,5 @@
 import * as React from "react";
+import 'core-js/actual/array/at';
 import Layout from "../../components/layout";
 import {
   Typography,
