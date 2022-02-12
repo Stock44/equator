@@ -1,8 +1,15 @@
 ---
 slug: "bernoullis-principle"
+latex: "a^2 + b^2 = c^2"
 title: "Bernoulli's Principle"
-latex: "x=2y"
 ---
+
+Maecenas metus tortor, finibus interdum maximus et, porta in
+tellus. Donec eu convallis nisl. Proin et cursus ligula. Nam ultrices convallis nulla, et ullamcorper urna mollis eu. In
+ut efficitur lorem. Phasellus convallis velit sed finibus cursus. Curabitur luctus felis sed iaculis vestibulum. Aliquam
+a metus id leo facilisis iaculis eu eget ex. Praesent non libero ut ipsum condimentum gravida. Mauris eleifend a nisl
+quis aliquet. Curabitur tincidunt non risus eu vulputate. Nulla eget finibus lectus. Cras aliquet sem at volutpat
+tincidunt. Nulla pretium justo eget velit porta interdum. In hac habitasse platea dictumst.
 
 # Lorem ipsum dolor sit amet.
 
@@ -12,13 +19,13 @@ non sollicitudin metus magna eget mauris. Sed et mi rutrum, vehicula massa a, el
 tellus volutpat dapibus. Aliquam elementum magna condimentum leo aliquam consectetur. Proin at nulla nec diam dapibus
 vehicula.
 
-## Integer pulvinar turpis quis est elementum interdum. 
+# Integer pulvinar turpis quis est elementum interdum. 
 Nam tristique eu lectus sit amet posuere. Suspendisse vestibulum
 justo ante, dignissim gravida massa vulputate ut. Phasellus quis justo sed lacus imperdiet vulputate in hendrerit
 libero. In eget malesuada diam, non auctor risus. Duis eget dictum tellus. Nam tincidunt tellus eu nisi fringilla
 cursus. Donec in posuere tellus. Aliquam ultrices rhoncus egestas. Phasellus aliquet accumsan nunc gravida egestas.
 
-### Curabitur ullamcorper arcu eros.
+## Curabitur ullamcorper arcu eros.
 Vitae pulvinar leo rutrum ac. Sed dapibus ultrices nisl a tempor. In nisi augue,
 feugiat nec nisi eget, tincidunt auctor nibh. Pellentesque ac quam at lorem vulputate congue ut et magna. Donec
 vehicula, nisi et interdum pretium, ligula lorem tincidunt ante, quis scelerisque elit ex tempus ante. Cras rutrum magna
