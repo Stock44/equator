@@ -1,4 +1,3 @@
-import * as React from "react";
 import TeX from "@matejmazur/react-katex";
 import { styled } from "@mui/material";
 

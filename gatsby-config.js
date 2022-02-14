@@ -11,7 +11,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `equation-pages`,
-        path: `${__dirname}/src/equation-pages`
+        path: `${__dirname}/equations`
       }
     },
     {

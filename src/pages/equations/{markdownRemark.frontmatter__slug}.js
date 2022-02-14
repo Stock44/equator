@@ -7,15 +7,11 @@ import {
   Stack,
   Paper,
 } from "@mui/material";
-import { Link as GatsbyLink } from "gatsby";
-import ScrollLink from "../../components/ScrollLink";
 import TextFit from "@tomplum/react-textfit";
 import StyledTeX from "../../components/StyledTeX";
-import { active } from "./equation.module.css";
 import { graphql } from "gatsby";
 import RehypeReact from "rehype-react";
 import slugify from "slugify";
-import Children from "react-children-utilities";
 import TableOfContents, { Section } from "../../components/TableOfContents";
 
 const renderAst = new RehypeReact({
@@ -131,17 +127,18 @@ function EquationPage({ data: { markdownRemark } }) {
 
 export default EquationPage;
 
-export const query = graphql`{
-  markdownRemark {
-		frontmatter {
-			title
-			latex
-    }
-    htmlAst
-    headings {
-      value
-      depth
+export const query = graphql`
+  query EquationBySlug($frontmatter__slug: String) {
+    markdownRemark(frontmatter: {slug: {eq: $frontmatter__slug}}) {
+      frontmatter {
+        title
+        latex
+      }
+      htmlAst
+      headings {
+        value
+        depth
+      }
     }
   }
-}
 `;
