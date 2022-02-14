@@ -46,42 +46,40 @@ function IndexPage() {
 
   const isSearchActive = searchField !== "";
 
-  return <Layout>
-    <Grid container direction="column">
-      <Grid item sx={{ transition: searchFieldTransition }} display="flex"
-            flexDirection="column"
-            alignItems="center"
-            paddingTop={isSearchActive ? theme.spacing(4) : "35vh"}>
-        <Box sx={{ marginTop: "auto" }}>
-          <Collapse in={!isSearchActive}>
-            <Typography variant="h1" textAlign="center"
-                        gutterBottom color="primary">equator</Typography>
-          </Collapse>
-          <TextField sx={{
-            minWidth: 324,
-            width: "80vw",
-            maxWidth: "md",
-          }} placeholder="Search for an equation"
-                     value={searchField} onChange={handleSearchFieldChange}
-                     textAlign="center"
-                     gutterBottom autoComplete="off" autoFocus/>
-        </Box>
-      </Grid>
-      <Grid item container spacing={2} padding={theme.spacing(4, 2)}>
-        {
-          isSearchActive ? test_content.map((content, index) =>
-            <Grid item xs={12} s={6} md={6} lg={4}>
-              <Grow in={isSearchActive} timeout={750}>
-                <EquationCard key={index} title={content.title}
-                              category={content.category}
-                              latex={content.latex} variant="outlined"/>
-              </Grow>
-            </Grid>
-          ) : null
-        }
-      </Grid>
+  return <Grid container direction="column">
+    <Grid item sx={{ transition: searchFieldTransition }} display="flex"
+          flexDirection="column"
+          alignItems="center"
+          paddingTop={isSearchActive ? theme.spacing(4) : "35vh"}>
+      <Box sx={{ marginTop: "auto" }}>
+        <Collapse in={!isSearchActive}>
+          <Typography variant="h1" textAlign="center"
+                      gutterBottom color="primary">equator</Typography>
+        </Collapse>
+        <TextField sx={{
+          minWidth: 324,
+          width: "80vw",
+          maxWidth: "md"
+        }} placeholder="Search for an equation"
+                   value={searchField} onChange={handleSearchFieldChange}
+                   textAlign="center"
+                   gutterBottom autoComplete="off" autoFocus />
+      </Box>
     </Grid>
-  </Layout>;
+    <Grid item container spacing={2} padding={theme.spacing(4, 2)}>
+      {
+        isSearchActive ? test_content.map((content, index) =>
+          <Grid item xs={12} s={6} md={6} lg={4}>
+            <Grow in={isSearchActive} timeout={750}>
+              <EquationCard key={index} title={content.title}
+                            category={content.category}
+                            latex={content.latex} variant="outlined" />
+            </Grow>
+          </Grid>
+        ) : null
+      }
+    </Grid>
+  </Grid>;
 
 }
 

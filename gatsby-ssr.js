@@ -1,7 +1,10 @@
-/**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/ssr-apis/
- */
+import * as React from "react";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import theme from "./src/theme";
 
-// You can delete this file if you're not using it
+export function wrapRootElement({ element }) {
+  return (<ThemeProvider theme={theme}>
+      <CssBaseline />
+      {element}
+    </ThemeProvider>);
+}
