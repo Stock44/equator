@@ -2,20 +2,16 @@ import * as React from "react";
 import { useState } from "react";
 import {
   Collapse,
-  createTheme,
   Grid,
   Typography,
   Box,
   TextField,
   Grow,
   Stack,
-  Container,
   useTheme
 } from "@mui/material";
-import Layout from "../components/layout";
 import EquationCard from "../components/equationCard";
 
-const theme = createTheme({});
 
 const test_content = [
   {
@@ -49,25 +45,30 @@ function IndexPage() {
 
   const isSearchActive = searchField !== "";
 
-  return <Stack>
-    <Container sx={{
-      mt: isSearchActive ? 4 : "50vh",
+  return <Stack sx={{
+    height: "100%",
+    alignItems: "center",
+    mt: isSearchActive ? 4 : "35vh",
+    transition: searchFieldTransition,
+  }}>
+    <Box sx={{
+      px: 2,
+      maxWidth: "sm",
+      width: "100%",
       justifyContent: "center",
-      transition: searchFieldTransition,
     }}>
       <Collapse in={!isSearchActive}>
         <Typography variant="h1" textAlign="center"
                     gutterBottom color="primary">equator</Typography>
       </Collapse>
       <TextField sx={{
-        minWidth: 324,
-        width: "80vw",
-        maxWidth: "md"
+        width: "100%",
+        boxSizing: "border-box",
       }} placeholder="Search for an equation"
                  value={searchField} onChange={handleSearchFieldChange}
                  textAlign="center"
-                 gutterBottom autoComplete="off" autoFocus />
-    </Container>
+                 gutterBottom autoComplete="off" autoFocus/>
+    </Box>
     <Grid container spacing={2} padding={theme.spacing(4, 2)}>
       {isSearchActive ? test_content.map(
         (content, index) => <Grid item xs={12} s={6} md={6} lg={4}>
