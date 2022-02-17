@@ -8,10 +8,11 @@ function EquationCard({
   title,
   category,
   latex,
+  slug,
   ...props
 }, ref) {
   return <Card sx={{ minWidth: 300 }} ref={ref} {...props}>
-    <CardActionArea component={Link} to="/equation">
+    <CardActionArea component={Link} to={`/equations/${slug}`}>
         <CardContent>
           <Typography color="grey.600"
                       variant="subtitle1">{category}</Typography>
