@@ -80,14 +80,17 @@ function IndexPage({
                  textAlign="center"
                  gutterBottom autoComplete="off" autoFocus />
     </Box>
-    <Grid container spacing={2} padding={theme.spacing(4, 2)}>
+    <Grid container spacing={2} alignItems="stretch" sx={{
+      py: 4,
+      px: 2,
+    }}>
       {isSearchActive ? nodes.map((document, index) => {
-        const { frontmatter } = document;
-        return <Grid item xs={12} s={6} md={6} lg={4}>
+        const { frontmatter, excerpt } = document;
+        return <Grid item xs={12} sm={6} md={4} lg={3}>
           <Grow in={isSearchActive} timeout={750}>
-            <EquationCard key={index} title={frontmatter.title}
-                          category="what" slug={frontmatter.slugra}
-                          latex={frontmatter.latex} variant="outlined" />
+            <EquationCard key={index} name={frontmatter.title}
+                          tags={frontmatter.tags} slug={frontmatter.slug}
+                          latex={frontmatter.latex} excerpt={excerpt}/>
           </Grow>
         </Grid>;
       }) : null}
@@ -106,8 +109,10 @@ export const query = graphql`
         frontmatter{
 				  slug,
           title,
-          latex
-        }
+          latex,
+          tags
+        },
+        excerpt
       }
     }
   }

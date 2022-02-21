@@ -1,7 +1,8 @@
 ---
 slug: "speed"
-latex: "\\frac{\\Delta s}{\\Delta t}"
+latex: "v=\\frac{\\Delta s}{\\Delta t}"
 title: "Speed"
+tags: [Physics, Kinematics]
 ---
 
 Maecenas metus tortor, finibus interdum maximus et, porta in
