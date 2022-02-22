@@ -8,6 +8,7 @@ import EquationCard from "../components/equationCard";
 
 // Temporary import to test links
 import { graphql } from "gatsby";
+import { TransitionGroup } from "react-transition-group";
 
 function IndexPage({
   navigate,
@@ -25,7 +26,7 @@ function IndexPage({
     const handleHashChange = (event) => {
       const { search } = queryString.parse(event.target.location.hash);
 
-      setSearchField(search ?? "")
+      setSearchField(search ?? "");
     };
     window.addEventListener("hashchange", handleHashChange);
     return () => {
@@ -51,7 +52,7 @@ function IndexPage({
 
   //region Constants
   const currentSearch = queryString.parse(hash).search ?? "";
-  const isSearchActive = !!currentSearch
+  const isSearchActive = !!currentSearch;
   const searchFieldTransition = theme.transitions.create(["margin"]);
   //endregion
 
@@ -82,18 +83,23 @@ function IndexPage({
     </Box>
     <Grid container spacing={2} alignItems="stretch" sx={{
       py: 4,
-      px: 2,
+      px: 2
     }}>
-      {isSearchActive ? nodes.map((document, index) => {
-        const { frontmatter, excerpt } = document;
-        return <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Grow in={isSearchActive} timeout={2000}>
-            <EquationCard key={index} name={frontmatter.title}
-                          tags={frontmatter.tags} slug={frontmatter.slug}
-                          latex={frontmatter.latex} excerpt={excerpt}/>
-          </Grow>
-        </Grid>;
-      }) : null}
+      {isSearchActive ? <TransitionGroup component={null}>
+        {nodes.map((document, index) => {
+          const {
+            frontmatter,
+            excerpt
+          } = document;
+          return <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+            <Grow>
+              <EquationCard name={frontmatter.title}
+                            tags={frontmatter.tags} slug={frontmatter.slug}
+                            latex={frontmatter.latex} excerpt={excerpt} />
+            </Grow>
+          </Grid>;
+        })}
+      </TransitionGroup> : null}
     </Grid>
   </Stack>;
 }
