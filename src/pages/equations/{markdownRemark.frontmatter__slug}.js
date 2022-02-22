@@ -1,11 +1,13 @@
 import * as React from "react";
-import 'core-js/actual/array/at';
+import "core-js/actual/array/at";
 import Layout from "../../components/layout";
 import {
   Typography,
   Box,
   Stack,
   Paper,
+  ListItem,
+  List
 } from "@mui/material";
 import TextFit from "@tomplum/react-textfit";
 import StyledTeX from "../../components/StyledTeX";
@@ -14,53 +16,67 @@ import RehypeReact from "rehype-react";
 import slugify from "slugify";
 import TableOfContents, { Section } from "../../components/TableOfContents";
 
+/**
+ * This object compiles an HTML syntax tree into React
+ * components, replacing the specified tags with the
+ * given components.
+ */
 const renderAst = new RehypeReact({
   createElement: React.createElement,
   Fragment: React.Fragment,
   components: {
-    p: (props) => <Typography variant="p" {...props} paragraph />,
+    p: (props) => <Typography variant="p" {...props} />,
     h1: (props) => <Typography variant="h2" {...props} />,
-    h2: (props) => <Typography variant="h3" {...props} />
+    h2: (props) => <Typography variant="h3" {...props} />,
+    ul: (props) => <List {...props} />,
+    li: (props) => <ListItem {...props} />,
+    div: (props) => <Stack sx={{ my: 1 }} {...props} />
   }
 }).Compiler;
 
+/**
+ * This function groups all sections inside an HTML AST into
+ * divs. A section is defined as a header (either h1 or h2)
+ * followed by any other content. A top level section may contain
+ * subsections within.
+ * @param {Object} htmlAst - The HTML AST.
+ * @return {Object} - The generated HTML AST.
+ */
 function addDivSectionsToHtmlAst(htmlAst) {
-  let newChildren = [];
+  function SectionDivNode(headerNode) {
+    this.type = "element";
+    this.tagName = "div";
+    this.properties = {
+      id: slugify(headerNode.children[0].value)
+    };
+    this.children = [headerNode];
+  }
+
+  // Leave top level object as is, iterate over children.
+  let sectionedAst = [];
   while (htmlAst.children.length) {
     const child = htmlAst.children.shift();
-
+    // If not an HTML tag continue
     if (!child.tagName) continue;
-
+    // Create new section if h1 or h2
+    // Else insert current tag into the children
+    // of the previous section
     if (child.tagName === "h1") {
-      newChildren.push({
-        type: "element",
-        tagName: "div",
-        properties: {
-          id: slugify(child.children[0].value)
-        },
-        children: [child]
-      });
+      sectionedAst.push(new SectionDivNode(child));
     } else if (child.tagName === "h2") {
-      newChildren.at(-1).children.push({
-        type: "element",
-        tagName: "div",
-        children: [child],
-        properties: {
-          id: slugify(child.children[0].value)
-        }
-      });
-    } else if (child.tagName === "p") {
-      if (newChildren.length === 0 || newChildren.at(-1).tagName !== "div") {
-        newChildren.push(child);
-      } else if (newChildren.at(-1).children.at(-1).tagName === "div") {
-        newChildren.at(-1).children.at(-1).children.push(child);
+      sectionedAst.at(-1).children.push(new SectionDivNode(child));
+    } else {
+      if (sectionedAst.length === 0 || sectionedAst.at(-1).tagName !== "div") {
+        sectionedAst.push(child);
+      } else if (sectionedAst.at(-1).children.at(-1).tagName === "div") {
+        sectionedAst.at(-1).children.at(-1).children.push(child);
       } else {
-        newChildren.at(-1).children.push(child);
+        sectionedAst.at(-1).children.push(child);
       }
     }
   }
 
-  htmlAst.children = newChildren;
+  htmlAst.children = sectionedAst;
 
   return htmlAst;
 }
@@ -82,7 +98,6 @@ function EquationPage({ data: { markdownRemark } }) {
 
   return <Layout>
     <Box sx={{
-      mt: 2,
       flexGrow: 1,
       display: "flex"
     }}>
@@ -91,7 +106,9 @@ function EquationPage({ data: { markdownRemark } }) {
         mx: "auto",
         px: 4
       }}>
-        <Paper variant="outlined">
+        <Paper variant="outlined" sx={{
+          my: 4
+        }}>
           <TextFit mode="single" max={56}>
             <StyledTeX math={latex} sx={{
               textAlign: "center",
@@ -101,7 +118,7 @@ function EquationPage({ data: { markdownRemark } }) {
             }} />
           </TextFit>
         </Paper>
-        <Typography variant="h1" sx={{ mt: 4 }}>
+        <Typography variant="h1" gutterBottom>
           {title}
         </Typography>
         {content}

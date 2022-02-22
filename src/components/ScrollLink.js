@@ -4,7 +4,7 @@ import { Link } from "react-scroll";
 
 
 const ScrollLinkBehavior = React.forwardRef((props, ref) => (
-  <Link innerRef={ref} {...props} />
+  <Link {...props} />
 ));
 
 /**

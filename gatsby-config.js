@@ -17,7 +17,14 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        plugins: []
+        plugins: [
+          {
+            resolve: `gatsby-remark-katex`,
+            options: {
+
+            }
+          }
+        ]
       }
     },
     `gatsby-plugin-material-ui`

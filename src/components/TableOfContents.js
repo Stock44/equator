@@ -79,7 +79,7 @@ export default function TableOfContents({
     <List>
       {
         sections.map(
-          (section) => <>
+          (section, index) => <React.Fragment key={index}>
             <ListItem sx={{
               p: 0,
               mt: 2
@@ -94,7 +94,7 @@ export default function TableOfContents({
               </ScrollLink>
             </ListItem>
             {
-              section.children.map((subsection) => <ListItem>
+              section.children.map((subsection, subindex) => <ListItem key={`sub-${subindex}`}>
                 <ScrollLink to={subsection.slug} smooth spy
                             activeClass={active} sx={{
                   color: "#808080",
@@ -105,7 +105,7 @@ export default function TableOfContents({
                 </ScrollLink>
               </ListItem>)
             }
-          </>)
+          </React.Fragment>)
       }
 
     </List>

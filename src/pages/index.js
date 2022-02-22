@@ -87,7 +87,7 @@ function IndexPage({
       {isSearchActive ? nodes.map((document, index) => {
         const { frontmatter, excerpt } = document;
         return <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Grow in={isSearchActive} timeout={750}>
+          <Grow in={isSearchActive} timeout={2000}>
             <EquationCard key={index} name={frontmatter.title}
                           tags={frontmatter.tags} slug={frontmatter.slug}
                           latex={frontmatter.latex} excerpt={excerpt}/>
