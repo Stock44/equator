@@ -7,9 +7,11 @@ import {
   Stack,
   Paper,
   ListItem,
-  List
+  List, Chip,
+  Grid
 } from "@mui/material";
 import TextFit from "@tomplum/react-textfit";
+import StyledTextFit from "../../components/StyledTextFit";
 import StyledTeX from "../../components/StyledTeX";
 import { graphql } from "gatsby";
 import RehypeReact from "rehype-react";
@@ -89,7 +91,8 @@ function EquationPage({ data: { markdownRemark } }) {
 
   const {
     title,
-    latex
+    latex,
+    tags
   } = markdownRemark.frontmatter;
 
   const sections = Section.sectionArrayFromHeadings(headings);
@@ -97,33 +100,41 @@ function EquationPage({ data: { markdownRemark } }) {
   const content = renderAst(addDivSectionsToHtmlAst(htmlAst));
 
   return <Layout>
-    <Box sx={{
-      flexGrow: 1,
-      display: "flex"
+    <Stack sx={{
+      maxWidth: "md",
+      width: "100%",
+      mx: "auto",
+      px: 4
     }}>
-      <Stack sx={{
-        maxWidth: "md",
-        mx: "auto",
-        px: 4
+      <Paper variant="outlined" sx={{
+        my: 4,
+        width: "100%",
       }}>
-        <Paper variant="outlined" sx={{
-          my: 4
+        <StyledTextFit mode="single" max={56} sx={{
+          my: 4,
+          mx: 2,
         }}>
-          <TextFit mode="single" max={56}>
-            <StyledTeX math={latex} sx={{
-              textAlign: "center",
-              display: "block",
-              my: 6,
-              mx: 2
-            }} />
-          </TextFit>
-        </Paper>
-        <Typography variant="h1" gutterBottom>
-          {title}
-        </Typography>
-        {content}
-      </Stack>
-    </Box>
+          <StyledTeX math={latex} sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}/>
+        </StyledTextFit>
+      </Paper>
+      <Typography variant="h1">
+        {title}
+      </Typography>
+      <Grid container spacing={1} sx={{
+        my: 2
+      }}>
+        {
+          tags.map(
+            (tag) => <Grid item key={tag} xs="auto">
+              <Chip label={tag} size="small" variant="outlined" />
+            </Grid>)
+        }
+      </Grid>
+      {content}
+    </Stack>
 
     <TableOfContents sections={sections} sx={{
       alignSelf: "flex-start",
@@ -150,6 +161,7 @@ export const query = graphql`
       frontmatter {
         title
         latex
+        tags
       }
       htmlAst
       headings {

@@ -2,7 +2,7 @@
 slug: "bernoullis-principle"
 latex: "a^2 + b^2 = c^2"
 title: "Bernoulli's Principle"
-tags: ["physics", "fluid-mechanics", "fluid-mechanics", "hydrodynamics"]
+tags: ["physics", "fluid-mechanics", "hydrodynamics"]
 ---
 
 Maecenas metus tortor, finibus interdum maximus et, porta in
